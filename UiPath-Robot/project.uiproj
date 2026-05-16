@@ -1,0 +1,6 @@
+{
+  "Name": "DHL_Scenario1_ArticleCleaner",
+  "ProjectType": "Process",
+  "Description": "Automated cleaning of messy KB articles from JSON Server.",
+  "MainFile": "Main.xaml"
+}

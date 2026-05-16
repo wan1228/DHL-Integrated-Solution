@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>DHL Knowledge Base System</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <!-- ═══════════════════════════════════════════ LOGIN PAGE -->
+  <div id="page-login" class="page active">
+    <div class="login-bg">
+      <div class="login-card">
+        <div class="login-logo">
+          <span class="logo-dhl">DHL</span>
+          <span class="logo-sub">Knowledge Base System</span>
+        </div>
+        <div id="login-error" class="error-msg hidden"></div>
+        <div class="form-group">
+          <label>Username</label>
+          <input type="text" id="login-username" placeholder="Enter username" />
+        </div>
+        <div class="form-group">
+          <label>Password</label>
+          <input type="password" id="login-password" placeholder="Enter password" />
+        </div>
+        <button class="btn-primary full-width" onclick="handleLogin()">Login</button>
+        <p class="login-hint">Demo accounts: admin/admin123 · editor/editor123 · reviewer/reviewer123</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════ MAIN APP -->
+  <div id="page-app" class="page hidden">
+
+    <!-- NAVBAR -->
+    <nav class="navbar">
+      <div class="nav-brand">
+        <span class="logo-dhl-sm">DHL</span>
+        <span class="nav-title">KB Automation</span>
+      </div>
+      <div class="nav-links">
+        <button class="nav-btn active" onclick="showSection('viewer')" id="nav-viewer">📋 Viewer</button>
+        <button class="nav-btn" onclick="showSection('upload')" id="nav-upload">⬆ Upload</button>
+      </div>
+      <div class="nav-user">
+        <span id="nav-username"></span>
+        <span id="nav-role" class="role-badge"></span>
+        <button class="btn-logout" onclick="handleLogout()">Logout</button>
+      </div>
+    </nav>
+
+    <!-- ─── VIEWER SECTION ─── -->
+    <section id="section-viewer" class="section active">
+      <div class="section-header">
+        <h2>Knowledge Base Articles</h2>
+        <span id="article-count" class="count-badge">0 articles</span>
+      </div>
+
+      <!-- Filter Bar -->
+      <div class="filter-bar">
+        <input type="text" id="search-input" placeholder="🔍 Search title or summary..." oninput="filterArticles()" />
+        <select id="filter-status" onchange="filterArticles()">
+          <option value="">All Statuses</option>
+          <option value="Pending">Pending</option>
+          <option value="Draft">Draft</option>
+          <option value="Reviewed">Reviewed</option>
+          <option value="Published">Published</option>
+        </select>
+        <select id="filter-creator" onchange="filterArticles()">
+          <option value="">All Creators</option>
+        </select>
+        <input type="date" id="filter-date" onchange="filterArticles()" title="Filter by created date" />
+        <input type="text" id="filter-tag" placeholder="🏷 Filter by tag..." oninput="filterArticles()" />
+        <button class="btn-clear" onclick="clearFilters()">✕ Clear</button>
+      </div>
+
+      <!-- Articles Grid -->
+      <div id="articles-grid" class="articles-grid"></div>
+    </section>
+
+    <!-- ─── UPLOAD SECTION ─── -->
+    <section id="section-upload" class="section hidden">
+      <div class="section-header">
+        <h2>Upload & Create KB Article</h2>
+      </div>
+
+      <div class="upload-layout">
+        <!-- Left: Input -->
+        <div class="upload-panel">
+          <div class="panel-title">📥 Input Source</div>
+
+          <div class="input-tabs">
+            <button class="tab-btn active" onclick="switchTab('text')" id="tab-text">Text Input</button>
+            <button class="tab-btn" onclick="switchTab('file')" id="tab-file">File Upload</button>
+          </div>
+
+          <div id="input-text" class="tab-content active">
+            <textarea id="raw-text" placeholder="Paste your raw content here (chat messages, email threads, notes, instructions...)"></textarea>
+          </div>
+
+          <div id="input-file" class="tab-content hidden">
+            <div class="drop-zone" id="drop-zone" onclick="document.getElementById('file-input').click()"
+              ondragover="handleDragOver(event)" ondrop="handleDrop(event)">
+              <div class="drop-icon">📁</div>
+              <p>Click or drag & drop files here</p>
+              <small>Supports: .txt, .pdf, .docx</small>
+            </div>
+            <input type="file" id="file-input" accept=".txt,.pdf,.docx" style="display:none" onchange="handleFileSelect(event)" />
+            <div id="file-preview" class="file-preview hidden"></div>
+          </div>
+
+          <div id="upload-msg" class="upload-msg hidden"></div>
+        </div>
+
+        <!-- Right: Article Form -->
+        <div class="upload-panel">
+          <div class="panel-title">📝 Article Details</div>
+
+          <div class="form-group">
+            <label>Title <span class="required">*</span></label>
+            <input type="text" id="article-title" placeholder="Enter article title" />
+          </div>
+
+          <div class="form-group">
+            <label>Summary <span class="required">*</span></label>
+            <textarea id="article-summary" placeholder="Brief summary of the article" rows="3"></textarea>
+          </div>
+
+          <div class="form-group">
+            <label>Steps / Content <span class="required">*</span></label>
+            <div id="steps-container">
+              <div class="step-row">
+                <span class="step-num">1</span>
+                <input type="text" class="step-input" placeholder="Enter step 1..." />
+                <button class="btn-remove-step" onclick="removeStep(this)">✕</button>
+              </div>
+            </div>
+            <button class="btn-add-step" onclick="addStep()">+ Add Step</button>
+          </div>
+
+          <div class="form-group">
+            <label>Tags</label>
+            <input type="text" id="article-tags" placeholder="e.g. parcel, handling, SOP (comma separated)" />
+          </div>
+
+          <div class="form-group">
+            <label>Initial Status</label>
+            <select id="article-status">
+              <option value="Pending">Pending</option>
+              <option value="Draft">Draft</option>
+              <option value="Reviewed">Reviewed</option>
+              <option value="Published">Published</option>
+            </select>
+          </div>
+
+          <div class="form-actions">
+            <button class="btn-secondary" onclick="clearForm()">Clear</button>
+            <button class="btn-primary" onclick="submitArticle()">💾 Save Article</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </div>
+
+  <!-- ═══════════════════════════════════════════ ARTICLE MODAL -->
+  <div id="modal-overlay" class="modal-overlay hidden" onclick="closeModal()">
+    <div class="modal" onclick="event.stopPropagation()">
+      <button class="modal-close" onclick="closeModal()">✕</button>
+      <div id="modal-content"></div>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>

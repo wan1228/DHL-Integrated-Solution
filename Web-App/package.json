@@ -1,0 +1,12 @@
+{
+  "name": "kb-automation",
+  "version": "1.0.0",
+  "description": "DHL Knowledge Base Automation System - SECJ 3483 Web Technology",
+  "scripts": {
+    "server": "json-server --watch db.json --port 3001",
+    "start": "json-server --watch db.json --port 3001"
+  },
+  "dependencies": {
+    "json-server": "^0.17.4"
+  }
+}

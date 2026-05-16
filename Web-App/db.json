@@ -1,0 +1,167 @@
+{
+  "users": [
+    {
+      "id": 1,
+      "username": "admin",
+      "password": "admin123",
+      "role": "admin",
+      "name": "Admin User"
+    },
+    {
+      "id": 2,
+      "username": "editor",
+      "password": "editor123",
+      "role": "editor",
+      "name": "Editor User"
+    },
+    {
+      "id": 3,
+      "username": "reviewer",
+      "password": "reviewer123",
+      "role": "reviewer",
+      "name": "Reviewer User"
+    }
+  ],
+  "articles": [
+    {
+      "id": 1,
+      "title": "Standard Parcel Handling Procedure",
+      "summary": "This SOP covers the correct procedure for handling standard parcels during inbound and outbound logistics operations.",
+      "steps": [
+        "Scan barcode upon receiving parcel",
+        "Verify parcel weight and dimensions",
+        "Sort by destination zone",
+        "Place on correct conveyor belt",
+        "Generate delivery manifest"
+      ],
+      "tags": [
+        "parcel",
+        "handling",
+        "inbound",
+        "outbound"
+      ],
+      "status": "Published",
+      "cleaned_steps": "",
+      "creatorName": "Admin User",
+      "creatorId": 1,
+      "createdAt": "2026-04-01T08:00:00.000Z",
+      "updatedAt": "2026-04-05T10:00:00.000Z",
+      "fileAttachments": [],
+      "statusHistory": [
+        {
+          "status": "Draft",
+          "timestamp": "2026-04-01T08:00:00.000Z",
+          "by": "Admin User"
+        },
+        {
+          "status": "Reviewed",
+          "timestamp": "2026-04-03T09:00:00.000Z",
+          "by": "Reviewer User"
+        },
+        {
+          "status": "Published",
+          "timestamp": "2026-04-05T10:00:00.000Z",
+          "by": "Admin User"
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "title": "Damaged Goods Reporting SOP",
+      "summary": "Procedure for identifying, documenting, and reporting damaged goods received at DHL warehouse.",
+      "steps": [
+        "Identify and isolate damaged parcel",
+        "Take photos of damage",
+        "Fill in damage report form",
+        "Notify supervisor",
+        "Update system with damage status"
+      ],
+      "tags": [
+        "damaged",
+        "reporting",
+        "warehouse",
+        "SOP"
+      ],
+      "status": "Reviewed",
+      "cleaned_steps": "",
+      "creatorName": "Editor User",
+      "creatorId": 2,
+      "createdAt": "2026-04-10T09:30:00.000Z",
+      "updatedAt": "2026-04-12T14:00:00.000Z",
+      "fileAttachments": [],
+      "statusHistory": [
+        {
+          "status": "Draft",
+          "timestamp": "2026-04-10T09:30:00.000Z",
+          "by": "Editor User"
+        },
+        {
+          "status": "Reviewed",
+          "timestamp": "2026-04-12T14:00:00.000Z",
+          "by": "Reviewer User"
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "title": "Cold Chain Monitoring Guidelines",
+      "summary": "Guidelines for maintaining temperature-sensitive shipments throughout the logistics chain.",
+      "steps": [
+        "Check refrigeration unit before loading",
+        "Log temperature every 2 hours",
+        "Alert supervisor if temp exceeds threshold",
+        "Document all temperature readings",
+        "Complete cold chain certificate on delivery"
+      ],
+      "tags": [
+        "cold chain",
+        "temperature",
+        "monitoring",
+        "guidelines"
+      ],
+      "status": "Reviewed",
+      "cleaned_steps": "",
+      "creatorName": "Editor User",
+      "creatorId": 2,
+      "createdAt": "2026-04-18T11:00:00.000Z",
+      "updatedAt": "2026-04-21T04:03:10.718Z",
+      "fileAttachments": [],
+      "statusHistory": [
+        {
+          "status": "Draft",
+          "timestamp": "2026-04-18T11:00:00.000Z",
+          "by": "Editor User"
+        },
+        {
+          "status": "Reviewed",
+          "timestamp": "2026-04-21T04:03:10.718Z",
+          "by": "Admin User"
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "title": "Customer Address Invalid",
+      "summary": "Customer Address Invalid",
+      "steps": [
+        "Add postcode manually",
+        "Revalidate Address"
+      ],
+      "tags": [],
+      "status": "Pending",
+      "cleaned_steps": "",
+      "creatorName": "Editor User",
+      "creatorId": 2,
+      "createdAt": "2026-05-14T18:19:03.632Z",
+      "updatedAt": "2026-05-14T18:19:03.632Z",
+      "fileAttachments": [],
+      "statusHistory": [
+        {
+          "status": "Pending",
+          "timestamp": "2026-05-14T18:19:03.632Z",
+          "by": "Editor User"
+        }
+      ]
+    }
+  ]
+}
